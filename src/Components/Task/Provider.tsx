@@ -7,7 +7,6 @@ import {
 import { TaskContext, TaskContextProps } from './Context';
 import { useComputed, useSignal } from '@preact/signals-react';
 import { TaskItem, TaskState } from './Types';
-import { isEqual, union } from 'lodash';
 import useLocalStorage from 'use-local-storage';
 
 export const TaskProvider: FunctionComponent<PropsWithChildren> = ({

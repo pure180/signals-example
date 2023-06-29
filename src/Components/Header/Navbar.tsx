@@ -8,9 +8,11 @@ import {
 } from '@mui/material';
 import { FunctionComponent, MouseEvent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthor } from '../Author/useAuthor';
 
 export const NavigationBar: FunctionComponent = () => {
   const navigate = useNavigate();
+  const { author } = useAuthor();
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {

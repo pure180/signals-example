@@ -13,20 +13,26 @@ import {
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
-import SelectInput from '@mui/material/Select/SelectInput';
+import { useAuthor } from '../Author/useAuthor';
 
 export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
   id,
 }) => {
   const { getTask } = useTasks();
   const { addTask, updateTask } = useTaskMethods();
+  const { author } = useAuthor();
 
   const navigate = useNavigate();
 
   const initialValues = useMemo<TaskItem>(
     () =>
       (id && getTask(id)) || {
-        author: { name: 'Daniel', email: 'info@daniel-pfisterer.de' },
+        author: author || {
+          firstName: '',
+          lastName: '',
+          email: '',
+          creationDate: new Date(),
+        },
         content: '',
         date: new Date(),
         dueTo: new Date(),
@@ -99,7 +105,7 @@ export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
           onChange={() => handleFromChange(values)}
           sx={{ display: 'flex', flexWrap: 'wrap' }}
         >
-          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <FormControl fullWidth sx={{ my: 1 }} variant="standard">
             <TextField
               error={!!errors.title?.length}
               fullWidth
@@ -115,7 +121,7 @@ export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
               variant="standard"
             />
           </FormControl>
-          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <FormControl fullWidth sx={{ my: 1 }} variant="standard">
             <Select
               fullWidth
               defaultValue={values.status}
@@ -129,7 +135,7 @@ export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
               </MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <FormControl fullWidth sx={{ my: 1 }} variant="standard">
             <TextField
               error={!!errors.content?.length}
               fullWidth
@@ -147,8 +153,7 @@ export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
               variant="standard"
             />
           </FormControl>
-
-          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <FormControl fullWidth sx={{ my: 1 }} variant="standard">
             <DateTimePicker
               defaultValue={dayjs(values.dueTo)}
               label="Due to"
@@ -164,7 +169,7 @@ export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
               }}
             />
           </FormControl>
-          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <FormControl fullWidth sx={{ my: 1 }} variant="standard">
             <Button
               type="submit"
               color="success"
@@ -173,7 +178,7 @@ export const TaskForm: FunctionComponent<Partial<Pick<TaskItem, 'id'>>> = ({
               Save task
             </Button>
           </FormControl>
-          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <FormControl fullWidth sx={{ my: 1 }} variant="standard">
             <Button color="secondary" onClick={handleCancel}>
               Cancel
             </Button>

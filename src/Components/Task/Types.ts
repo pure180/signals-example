@@ -1,7 +1,4 @@
-export interface Author {
-  name: string;
-  email: string;
-}
+import { Author } from '../Author/useAuthor';
 
 export const enum TaskStatus {
   Doing = 'Doing',
