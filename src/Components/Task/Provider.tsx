@@ -45,6 +45,7 @@ export const TaskProvider: FunctionComponent<PropsWithChildren> = ({
     }
 
     list.value = tasks;
+
     setTaskListStorage(tasks);
   }, [list.value, item.value, setTaskListStorage]);
 
