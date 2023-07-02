@@ -41,6 +41,7 @@ export const AuthorForm: FunctionComponent = () => {
     return errors;
   }, []);
 
+  console.log(author);
   return (
     <Formik<Author>
       initialValues={initialValues}

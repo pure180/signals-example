@@ -1,5 +1,5 @@
-import { signal } from '@preact/signals-core';
 import { useCallback, useMemo } from 'react';
+import { authorSignal } from './authorSignal';
 
 export interface Author {
   creationDate: Date;
@@ -8,14 +8,15 @@ export interface Author {
   lastName: string;
 }
 
-export const authorSignal = signal<Author | null>(null);
-
 export const useAuthor = () => {
   const author = useMemo(() => authorSignal || null, []);
 
-  const setAuthor = useCallback((value: Author) => {
-    author.value = value;
-  }, []);
+  const setAuthor = useCallback(
+    (value: Author) => {
+      author.value = value;
+    },
+    [author]
+  );
 
   return {
     author: author.value,
